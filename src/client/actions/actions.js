@@ -54,13 +54,14 @@ export const addFood = (dispatch, data) => {
     });
 };
 
-export const loadEventsHosting = dispatch => {
-  URL = '';
+export const loadEventsHosting = () => dispatch => {
+  URL = '/api/events';
   fetch(URL)
     .then(function(response) {
       return response.json();
     })
     .then(function(myJson) {
+      // console.log(myJson);
       let events = JSON.stringify(myJson);
       events = JSON.parse(events);
       dispatch({

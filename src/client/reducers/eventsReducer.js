@@ -10,7 +10,7 @@ const eventsReducer = (state = initialState, action) => {
     case types.LOAD_EVENTS_HOSTING:
       return {
         ...state,
-        eventsImHosting: action.payload.events
+        eventsImHosting: action.payload
       };
 
     case types.CREATE_EVENT:
