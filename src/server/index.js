@@ -9,9 +9,19 @@ app.use(bodyParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
 
+
+/* -------------------General--------------------- */
+
 // Get all the events from the event table.
-app.get('/event', HostController.getAllEvent, (req, res) => {
-  res.status(200).json(res.locals.results);
+app.get('/events', HostController.getAllEvents, (req, res) => {
+  res.status(200).json(res.locals.allEvents);
+});
+
+/* -------------------Host--------------------- */
+
+// Get all events for host
+app.get('/event/:hostId', HostController.getHostEvents, (req, res) => {
+  res.status(200).json(res.locals.singleEvent);
 });
 
 // Insert an event to the event table.
