@@ -12,11 +12,19 @@ const userController = {
   },
 
   getFoodList(req, res, next) {
-
+    db.query('SELECT * from event_food WHERE event_id = ?;', [req.params.eventId], (err, results) =>{
+      if (err) throw err;
+      res.locals.foodList = results;
+      next();
+    });
   },
 
-  getInvitedPeople(req, res, next) {
-
+  getInviteList(req, res, next) {
+    db.query('SELECT * from event_user WHERE event_id =?;', [req.params.eventId], (err, results) => {
+      if (err) throw err;
+      res.locals.inviteList = results;
+      next();
+    });
   },
 };
 
