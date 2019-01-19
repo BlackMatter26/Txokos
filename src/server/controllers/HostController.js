@@ -3,11 +3,11 @@ const db = require('../models/database.js');
 const hostController = {
   createEvent(req, res, next) {
     db.query('INSERT INTO event SET ?', {
-      host_id: req.params.host_id,
+      host_id: req.params.hostId,
       time: req.body.event_time,
       location: req.body.location,
-      max_attend: req.body.max_attend,
-      event_name: req.body.event_name,
+      max_attend: req.body.maxAttend,
+      event_name: req.body.eventName,
     }, (err, results) => {
       if (err) throw err;
       res.locals.eventId = results.insertId;
