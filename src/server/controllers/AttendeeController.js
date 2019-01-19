@@ -7,26 +7,27 @@ const attendeeController = {
     db.query('SELECT * from event_user WHERE attendee_id = ?', [attendeeId], (err, results) => {
       if (err) throw err;
       res.locals.attendeeInvitedEvents = results;
-      db.end();
+      //   db.end();
       next();
     });
   },
 
   getRSVPEvents(req, res, next) {
     const { attendeeId } = req.params;
-    db.query('SELECT * from event_user WHERE attendee_id = ? AND rsvp = ?', [attendeeId, true], (err, results) => {
+    db.query('SELECT * from event_user WHERE attendee_id = ? AND rsvp = ?', [attendeeId, 1], (err, results) => {
       if (err) throw err;
       res.locals.attendeeRSVPEvents = results;
-      db.end();
+      //   db.end();
       next();
     });
   },
 
   rsvpEvent(req, res, next) {
     const { attendeeId, eventId } = req.params;
-    db.query('UPDATE event_user SET rsvp = ? WHERE attendee_id = ? AND event_id = ?', [true, attendeeId, eventId], (err, results) => {
+    db.query('UPDATE event_user SET rsvp = ? WHERE attendee_id = ? AND event_id = ?', [1, attendeeId, eventId], (err, results) => {
       if (err) throw err;
-      db.end();
+      res.locals.updatedRsvpEvent = results.changedRows;
+      //   db.end();
       next();
     });
   },
@@ -36,9 +37,8 @@ const attendeeController = {
     db.query('SELECT event_user_id FROM event_user WHERE attendee_id = ? AND event_id = ?', [attendeeId, eventId], (err, results) => {
       if (err) throw err;
       const rsvpID = `rsvp${attendeeId}${eventId}`;
-      console.log(`Is this going to be an array? ${results}`);
-      res.locals[rsvpID] = results;
-      db.end();
+      res.locals[rsvpID] = results[0].event_user_id;
+      //   db.end();
       next();
     });
   },
@@ -48,7 +48,8 @@ const attendeeController = {
     const rsvpID = `rsvp${attendeeId}${eventId}`;
     db.query('UPDATE event_food SET event_user_id = ? WHERE event_food_id = ?', [res.locals[rsvpID], eventFoodId], (err, results) => {
       if (err) throw err;
-      db.end();
+      res.locals.updatedEventFoodId = results.changedRows;
+      //   db.end();
       next();
     });
   },
