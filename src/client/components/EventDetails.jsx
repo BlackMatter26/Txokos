@@ -8,6 +8,7 @@ const EventDetails = props => {
           <input id="foodSubmit"></input>
           <button type="submit" name="foodSubmit" >Submit</button>
         </form>
+        
         <form action='/' method="post">
           <label htmlFor="inviteSubmit">Invite Guest:</label>
           <input id="inviteSubmit"></input>
