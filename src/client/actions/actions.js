@@ -70,3 +70,17 @@ export const loadEventsHosting = () => dispatch => {
       });
     });
 };
+
+export const loadEventsInvited = () => dispatch => {
+  URL = '/api/attendee_invited_event/4';
+  fetch(URL)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(myJson) {
+      dispatch({
+        type: types.LOAD_EVENTS_INVITED,
+        payload: myJson
+      });
+    });
+};

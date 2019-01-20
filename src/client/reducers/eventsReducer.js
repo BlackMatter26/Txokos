@@ -13,6 +13,12 @@ const eventsReducer = (state = initialState, action) => {
         eventsImHosting: action.payload
       };
 
+    case types.LOAD_EVENTS_INVITED:
+      return {
+        ...state,
+        eventsImInvitedTo: action.payload
+      };
+
     case types.CREATE_EVENT:
       const { host, location, time, date, foodList, invitees } = action.payload;
 

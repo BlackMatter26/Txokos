@@ -19,7 +19,6 @@ class HostViewContainer extends Component {
     this.props.loadEventsHosting();
   }
   render() {
-    console.log('eventsImHosting1 ', this.props.eventsImHosting);
     return (
       <div className="hostViewOuterDiv">
         <MyEvents eventsImHosting={this.props.eventsImHosting} />
@@ -32,3 +31,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(HostViewContainer);
+ 

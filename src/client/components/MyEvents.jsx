@@ -7,17 +7,22 @@ const MyEvents = props => {
   const events = [];
   props.eventsImHosting.forEach((event, i) => {
     const id = event.event_id;
+    console.log(event);
     events.push(
-      <Router>
+      <Router key={`router${id}`}>
         <div>
-          <Event id={i} key={id} event={event} />
+          <Event id={i} key={`event${id}`} event={event} />
           <div>
-            <button type="button" name="details">
-              <Link to="/details">Details</Link>
-            </button>
+            <Link className="detailsButton" key={`link${id}`} to="/details">
+              Details
+            </Link>
+
             <Route
+              key={`route${id}`}
               path="/details"
-              render={() => <EventDetails eventId={id} />}
+              render={() => (
+                <EventDetails key={`eventDetails${id}`} eventId={id} />
+              )}
             />
           </div>
         </div>
@@ -25,7 +30,7 @@ const MyEvents = props => {
     );
   });
 
-  return <div>{events}</div>;
+  return <div className="myEvents">{events}</div>;
 };
 
 export default MyEvents;
