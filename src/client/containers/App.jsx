@@ -1,17 +1,32 @@
 import React, { Component } from 'react';
-import './styles/app.css';
+import HostViewContainer from './HostViewContainer';
+import AttendeeViewContainer from './AttendeeViewContainer';
+import { BrowserRouter as Router, Route, Link, Prompt } from 'react-router-dom';
 
 export default class App extends Component {
-  state = { username: null };
-
-  componentDidMount() {
-    // fetch('/api/getUsername')
-    //   .then(res => res.json())
-    //   .then(user => this.setState({ username: user.username }));
-  }
-
   render() {
-    const { username } = this.state;
-    return <div>{username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}</div>;
+    return (
+      <div>
+        <div id="txokos">TXOKOS</div>
+        <Router>
+          <div>
+            <nav>
+              <Link className="navLinks" to="/host">
+                Host
+              </Link>{' '}
+              <Link className="navLinks" to="/attendee">
+                Attendee
+              </Link>{' '}
+            </nav>
+            <div>
+              <Route path="/host" exact component={HostViewContainer} />
+              <Route path="/attendee" exact component={AttendeeViewContainer} />
+            </div>
+          </div>
+        </Router>
+        <div className="landingPage" />
+        <img src="https://images.earthtouchnews.com/media/1516126/pink_fairy_armadillo_nigiri_2015-11-19.jpg" />
+      </div>
+    );
   }
 }

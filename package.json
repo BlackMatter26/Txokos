@@ -14,12 +14,15 @@
   "license": "ISC",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^6.0.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
-    "body-parser": "^1.18.3"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -41,6 +44,7 @@
     "mysql": "^2.16.0",
     "nodemon": "^1.17.3",
     "redux-devtools": "^3.5.0",
+    "redux-devtools-extension": "^2.13.2",
     "style-loader": "^0.23.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.5.0",
