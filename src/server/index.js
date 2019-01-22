@@ -28,6 +28,7 @@ app.get('/api/food_list/:eventId', UserController.getFoodList, (req, res) => {
   res.status(200).json(res.locals.foodList);
 });
 
+// Get all attendees
 app.get(
   '/api/invite_list/:eventId',
   UserController.getInviteList,

@@ -2,7 +2,9 @@ import * as types from '../constants/actionTypes';
 
 const initialState = {
   eventsImInvitedTo: [],
-  eventsImHosting: []
+  eventsImHosting: [],
+  listOfAttendees: [],
+  seeEventDetails: false
 };
 
 const eventsReducer = (state = initialState, action) => {
@@ -44,6 +46,11 @@ const eventsReducer = (state = initialState, action) => {
     case types.INVITE_PEOPLE:
 
     case types.VIEW_ATTENDEES:
+      return {
+        ...state,
+        seeEventDetails: true,
+        listOfAttendees: action.payload
+      };
 
     default:
       return state;
