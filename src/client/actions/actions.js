@@ -84,3 +84,19 @@ export const loadEventsInvited = () => dispatch => {
       });
     });
 };
+
+export const listAttendees = (event) => dispatch => {
+  URL = `/api/invite_list/${event.target.id}`;
+  fetch(URL)
+    .then(function(response) {
+      console.log('hello: ', response);
+      return response.json();
+    })
+    .then(function(myJson) {
+      // console.log('response: ', myJson);
+      dispatch({
+        type: types.VIEW_ATTENDEES,
+        payload: myJson
+      });
+    });
+};

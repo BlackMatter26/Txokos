@@ -13,13 +13,15 @@ export default class App extends Component {
             <nav>
               <Link className="navLinks" to="/host">
                 Host
-              </Link>{' '}
+              </Link>
               <Link className="navLinks" to="/attendee">
                 Attendee
-              </Link>{' '}
+              </Link>
             </nav>
             <div>
-              <Route path="/host" exact component={HostViewContainer} />
+              <Route path="/host" component={HostViewContainer} />
+              <Route path="/host/details" component={HostViewContainer} />
+
               <Route path="/attendee" exact component={AttendeeViewContainer} />
             </div>
           </div>

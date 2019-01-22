@@ -7,13 +7,12 @@ const MyEvents = props => {
   const events = [];
   props.eventsImHosting.forEach((event, i) => {
     const id = event.event_id;
-    console.log(event);
     events.push(
       <Router key={`router${id}`}>
         <div>
           <Event id={i} key={`event${id}`} event={event} />
           <div>
-            <Link className="detailsButton" key={`link${id}`} to="/details">
+            <Link id={id} className="detailsButton" key={`link${id}`} to="/details" onClick={props.listAttendees}>
               Details
             </Link>
 
