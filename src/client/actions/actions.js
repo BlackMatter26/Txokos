@@ -89,7 +89,6 @@ export const listAttendees = (event) => dispatch => {
   URL = `/api/invite_list/${event.target.id}`;
   fetch(URL)
     .then(function(response) {
-      console.log('hello: ', response);
       return response.json();
     })
     .then(function(myJson) {

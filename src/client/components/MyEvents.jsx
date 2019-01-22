@@ -13,19 +13,24 @@ const MyEvents = props => {
           <Event id={i} key={`event${id}`} event={event} />
           <div>
             <Link id={id} className="detailsButton" key={`link${id}`} to="/details" onClick={props.listAttendees}>
-              Details
+              Details 
             </Link>
 
             <Route
               key={`route${id}`}
               path="/details"
-              render={() => (
-                <EventDetails key={`eventDetails${id}`} eventId={id} />
-              )}
+              // render={() => (
+              //   <EventDetails key={`eventDetails${id}`} eventId={id} />
+              // )}
             />
           </div>
         </div>
       </Router>
+
+      // <div>
+      //     <Event id={i} key={`event${id}`} event={event} />
+      //     <button id={id} onClick={}></button>
+      // </div>
     );
   });
 

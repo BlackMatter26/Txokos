@@ -5,17 +5,23 @@ import { BrowserRouter as Router, Route, Link, Prompt } from 'react-router-dom';
 const SidePanel = props => {
     const panel = [];
 
-    // panel.push(
-    //     <EventDetails/>
+    if( props.seeEventDetails){
+      panel.push(
+        <EventDetails/>
 
-    // );
-
-    // for(/* loop through the list of ppl invited & food bringing, prob passed down via props*/){
-    //     panel.push(
-    //         <div className="attendeeName">Name</div>
-    //         <div className="item">Item</div>
-    //     );
-    // };
+    );
+    }
+   
+    console.log("List of Attendees ", props.listOfAttendees);
+    for(let i = 0; i < props.listOfAttendees.length; i++){
+        panel.push(
+          <div className = "attendee" key={i}>
+            <div className="attendeeName">{props.listOfAttendees[i].name}</div>
+            <div className="item">{props.listOfAttendees[i].food_name}</div>
+          </div>
+            
+        );
+    };
 
     return <div className="sidePanel">{panel}</div>
 }
