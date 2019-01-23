@@ -2,20 +2,19 @@ import React, { Component } from 'react';
 import HostViewContainer from './HostViewContainer';
 import AttendeeViewContainer from './AttendeeViewContainer';
 import { BrowserRouter as Router, Route, Link, Prompt } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../actions/actions';
 
-const Header = () => <h2>Header</h2>
-const Dashboard = () => <h2>Dashboard</h2>
+class App extends Component {
 
-export default class App extends Component {
+  componentDidMount() {
+    this.props.fetchUser();
+  }
+
   render() {
     return (
       <div>
         <div id="txokos">TXOKOS</div>
-        <Router>
-          <div >
-            <Route path="/" component={Header}/>
-          </div>
-        </Router>
         <Router>
           <div>
             <a href="/auth/google">Sign in With Google</a>
@@ -41,3 +40,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default connect(null,actions)(App);

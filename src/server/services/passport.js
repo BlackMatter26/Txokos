@@ -9,7 +9,6 @@ passport.serializeUser((user,done) => {
 });
 
 passport.deserializeUser((user_id , done) => {
-  console.log("the user id in deserialize user ",user_id);
   db.query(
     'SELECT *FROM user WHERE user_id=?',
     user_id, (err,user)=>{
