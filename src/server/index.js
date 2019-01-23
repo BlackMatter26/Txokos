@@ -1,16 +1,44 @@
 const express = require('express');
-
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 const path = require('path');
+const keys = require('./config/keys');
+
 const app = express();
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-TypeError, Accept');
+  next();
+});
+
+//connects the routes for OAuth
+// make cookie last 30 days
+app.use(
+  cookieSession({
+    maxAge:30*24*60*60*1000, 
+    keys: [keys.cookieKey]
+  })
+);
+  
+require('./services/passport'); //calls passport.js used for OAuth
+app.use(passport.initialize());
+app.use(passport.session());
+  
+require('./controllers/AuthController')(app);
 const bodyParser = require('body-parser');
 const HostController = require('./controllers/HostController.js');
 const AttendeeController = require('./controllers/AttendeeController.js');
 const UserController = require('./controllers/UserController.js');
 
-app.use(express.static('/dist'));
+
+
+
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
+
+
+ 
 
 /* -------------------General--------------------- */
 
@@ -113,5 +141,7 @@ app.post(
     res.status(200).json(res.locals.updatedEventFoodId);
   }
 );
+
+app.use(express.static(path.resolve(__dirname,'../../build'))); 
 
 app.listen(8080, () => console.log('Listening on port 8080!'));

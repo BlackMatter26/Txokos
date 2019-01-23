@@ -98,3 +98,20 @@ export const listAttendees = (event) => dispatch => {
       });
     });
 };
+
+export const fetchUser = () => dispatch => {
+  URL = `/api/current_user`;
+  fetch(URL)
+    .then((response) => 
+      response.json())
+    .then((res) => {
+      dispatch({
+        type: types.FETCH_USER,
+        payload: res || false
+      });
+      
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+}
