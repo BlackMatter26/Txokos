@@ -4,9 +4,15 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actions';
 import MyEvents from '../components/MyEvents';
 import EventDetails from '../components/EventDetails';
+import SidePanelAttendee from '../components/SidePanelAttendee';
 
 const mapStateToProps = ({ events }) => ({
-  eventsImInvitedTo: events.eventsImInvitedTo
+  eventsImInvitedTo: events.eventsImInvitedTo,
+  foodsToBring: events.foodsToBring,
+  listOfAttendees: events.listOfAttendees,
+  // update state of what the rsvp choice is
+  // update state of what the food choice will be
+  seeEventDetails: false
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
@@ -21,7 +27,8 @@ class AttendeeViewContainer extends Component {
   render() {
     return (
       <div className="AttendeeViewOuterDiv">
-        <MyEvents eventsImHosting={this.props.eventsImInvitedTo} />
+        <MyEvents id="myEvents" eventsImHosting={this.props.eventsImInvitedTo} />
+        <SidePanelAttendee id="sidePanelAttendee" listOfAttendees={this.props.listOfAttendees} />
       </div>
     );
   }

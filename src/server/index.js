@@ -31,11 +31,19 @@ app.get('/api/food_list/:eventId', UserController.getFoodList, (req, res) => {
 // Get all attendees
 app.get(
   '/api/invite_list/:eventId',
-  UserController.getInviteList,
+  UserController.getInviteList, // this gets the people who have rsvp'd yes & their food 
+  UserController.getAttendeeList, // this gets the people who haven't responded to the invite 
+  UserController.getEventDateTime, // this gets details of the event: host, date, location, time
   (req, res) => {
-    res.status(200).json(res.locals.inviteList);
+    const data = {
+      invited: res.locals.attendeeList,
+      rsvpd: res.locals.inviteList,
+      dateTime: res.locals.eventDateTime
+    }
+    res.status(200).json(data);
   }
 );
+
 /* -------------------Host--------------------- */
 
 // Get all events for host
@@ -66,6 +74,7 @@ app.post(
 );
 
 /* --------------- Attendee --------------- */
+
 // Get all invited events for a specific attendee EVEN the RSVP ones
 app.get(
   '/api/attendee_invited_event/:attendeeId',
