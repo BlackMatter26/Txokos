@@ -5,7 +5,11 @@ const path = require('path');
 const keys = require('./config/keys');
 
 const app = express();
-console.log("DIR NAME ", __dirname)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-TypeError, Accept');
+  next();
+});
 
 //connects the routes for OAuth
 // make cookie last 30 days
@@ -26,11 +30,7 @@ const HostController = require('./controllers/HostController.js');
 const AttendeeController = require('./controllers/AttendeeController.js');
 const UserController = require('./controllers/UserController.js');
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-TypeError, Accept');
-  next();
-});
+
 
 
 app.use(bodyParser());

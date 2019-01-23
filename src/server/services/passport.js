@@ -5,10 +5,15 @@ const db = require('../models/database.js');
 
 passport.serializeUser((user,done) => {
   console.log("passport.js the user in serialize is ", user);
-  done(null, user[0].user_id);
+  if(user.length < 1) done(null, 0);
+  else done(null, user[0].user_id);
 });
 
 passport.deserializeUser((user_id , done) => {
+  console.log("desrialize user id", user_id)
+  if(user_id.length < 1){
+    done(null,null);
+  }
   db.query(
     'SELECT *FROM user WHERE user_id=?',
     user_id, (err,user)=>{
@@ -42,7 +47,15 @@ passport.use(new GoogleStrategy({
                 },
                 (err, results) => {
                   if (err) throw err;
-                  done(null,results);
+                  console.log("passport",results.insertId)
+                  db.query('SELECT * FROM user WHERE user_id=?',
+                    results.insertId,
+                  (err, res) =>{
+                    console.log("FIND THE USER RESULTS ", res)
+                    done(null,res);
+
+                  })
+                  // done(null,res);
 
                   // res.locals.googleID = results.insertId;
                   // db.end();

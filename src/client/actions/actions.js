@@ -101,15 +101,18 @@ export const listAttendees = (event) => dispatch => {
 };
 
 export const fetchUser = () => dispatch => {
-  console.log("IN FETCH UER IN ACTIONS")
   URL = `/api/current_user`;
   fetch(URL)
-    .then((response) => response.json())
+    .then((response) => 
+      response.json())
     .then((res) => {
       dispatch({
         type: types.FETCH_USER,
-        payload: res
+        payload: res || false
       });
       
+    })
+    .catch(err=>{
+      console.log(err);
     })
 }
