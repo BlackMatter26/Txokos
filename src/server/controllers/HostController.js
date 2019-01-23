@@ -9,14 +9,14 @@ const hostController = {
         time: req.body.eventTime,
         location: req.body.location,
         max_attend: req.body.maxAttend,
-        event_name: req.body.eventName
+        event_name: req.body.eventName,
       },
       (err, results) => {
         if (err) throw err;
         res.locals.eventId = results.insertId;
         // db.end();
         next();
-      }
+      },
     );
   },
 
@@ -29,7 +29,7 @@ const hostController = {
         res.locals.hostEvents = results;
         // db.end();
         next();
-      }
+      },
     );
   },
 
@@ -39,14 +39,14 @@ const hostController = {
       'INSERT INTO event_food SET ?',
       {
         event_id: req.params.eventId,
-        food_name: req.body.foodName
+        food_name: req.body.foodName,
       },
       (err, results) => {
         if (err) throw err;
         res.locals.eventFoodId = results.insertId;
         // db.end();
         next();
-      }
+      },
     );
   },
 
@@ -59,7 +59,7 @@ const hostController = {
         res.locals.userId = results[0].user_id;
         // db.end();
         next();
-      }
+      },
     );
   },
 
@@ -69,16 +69,16 @@ const hostController = {
       {
         attendee_id: res.locals.userId,
         event_id: req.params.eventId,
-        rsvp: 0
+        rsvp: 0,
       },
       (err, results) => {
         if (err) throw err;
         res.locals.userEventsId = results.insertId;
         // db.end();
         next();
-      }
+      },
     );
-  }
+  },
 };
 
 module.exports = hostController;

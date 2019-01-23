@@ -78,3 +78,8 @@ body {
 .landingPage {
   background-image: url('https://images.earthtouchnews.com/media/1516126/pink_fairy_armadillo_nigiri_2015-11-19.jpg');
 }
+
+.listOfAttendees {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

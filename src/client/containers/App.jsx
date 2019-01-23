@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router, Route, Link, Prompt,
+} from 'react-router-dom';
 import HostViewContainer from './HostViewContainer';
 import AttendeeViewContainer from './AttendeeViewContainer';
-import { BrowserRouter as Router, Route, Link, Prompt } from 'react-router-dom';
 
 export default class App extends Component {
   render() {
