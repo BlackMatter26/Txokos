@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Boilerplate to build a full stack.",
   "main": "src/server/index.js",
+  "proxy": {
+    "/auth/google": {
+      "target": "http://localhost:8080"
+    }
+  },
   "scripts": {
     "build": "webpack --mode production",
     "start": "npm run build && node src/server/index.js",
@@ -17,6 +22,7 @@
     "body-parser": "^1.18.3",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.3",
+    "http-proxy-middleware": "^0.19.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "react": "^16.5.2",
