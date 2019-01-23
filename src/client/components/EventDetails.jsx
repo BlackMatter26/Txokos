@@ -32,7 +32,7 @@ const EventDetails = props => {
       </form>
 
       <form action={`/api/add_invite/${props.eventId}`} method="post">
-        <label htmlFor="email">Invite Guess: </label>
+        <label htmlFor="email">Invite Guest: </label>
         <input
           className="formInput"
           type="text"

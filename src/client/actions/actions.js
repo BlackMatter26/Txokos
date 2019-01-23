@@ -92,7 +92,6 @@ export const listAttendees = (event) => dispatch => {
       return response.json();
     })
     .then(function(myJson) {
-      // console.log('response: ', myJson);
       dispatch({
         type: types.VIEW_ATTENDEES,
         payload: myJson

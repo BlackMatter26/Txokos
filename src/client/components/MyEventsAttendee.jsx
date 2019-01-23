@@ -12,7 +12,7 @@ const MyEvents = props => {
         <div>
           <Event id={i} key={`event${id}`} event={event} />
           <div>
-            <Link id={id} className="detailsButton" key={`link${id}`} to="/details" onClick={props.listAttendees}>
+            <Link id={id} className="detailsButton" key={`link${id}`} to="/details" onClick={props.listOfAttendees}>
               Details 
             </Link>
 

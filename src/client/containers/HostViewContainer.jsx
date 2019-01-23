@@ -9,7 +9,8 @@ import SidePanel from '../components/SidePanel';
 const mapStateToProps = ({ events }) => ({
   eventsImHosting: events.eventsImHosting,
   listOfAttendees: events.listOfAttendees,
-  seeEventDetails: events.seeEventDetails
+  seeEventDetails: events.seeEventDetails,
+  listOfInvited: events.listOfInvited
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
@@ -25,7 +26,7 @@ class HostViewContainer extends Component {
     return (
       <div className="hostViewOuterDiv">
         <MyEvents id="myEvents" eventsImHosting={this.props.eventsImHosting} listAttendees={this.props.listAttendees} />
-        <SidePanel id="sidePanel" listOfAttendees={this.props.listOfAttendees} seeEventDetails= {this.props.seeEventDetails} /> 
+        <SidePanel id="sidePanel" listOfAttendees={this.props.listOfAttendees} seeEventDetails={this.props.seeEventDetails}/> 
       </div>
     );
   }
