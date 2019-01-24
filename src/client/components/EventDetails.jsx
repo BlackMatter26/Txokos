@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EventDetails = props => {
+const EventDetails = (props) => {
   // why does event.target.value not needed? Why does event not grab the buttons properties
   function grabInput(event) {
     return event.value;

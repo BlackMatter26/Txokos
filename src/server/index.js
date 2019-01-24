@@ -11,19 +11,20 @@ app.use((req, res, next) => {
   next();
 });
 
-//connects the routes for OAuth
+// connects the routes for OAuth
 // make cookie last 30 days
 app.use(
   cookieSession({
-    maxAge:30*24*60*60*1000, 
-    keys: [keys.cookieKey]
-  })
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey],
+  }),
 );
-  
-require('./services/passport'); //calls passport.js used for OAuth
+
+require('./services/passport');
+ // calls passport.js used for OAuth
 app.use(passport.initialize());
 app.use(passport.session());
-  
+
 require('./controllers/AuthController')(app);
 const bodyParser = require('body-parser');
 const HostController = require('./controllers/HostController.js');
@@ -31,14 +32,10 @@ const AttendeeController = require('./controllers/AttendeeController.js');
 const UserController = require('./controllers/UserController.js');
 
 
-
-
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
 
-
- 
 
 /* -------------------General--------------------- */
 
@@ -59,17 +56,18 @@ app.get('/api/food_list/:eventId', UserController.getFoodList, (req, res) => {
 // Get all attendees
 app.get(
   '/api/invite_list/:eventId',
-  UserController.getInviteList, // this gets the people who have rsvp'd yes & their food 
-  UserController.getAttendeeList, // this gets the people who haven't responded to the invite 
+  UserController.getInviteList, // this gets the people who have rsvp'd yes & their food
+  UserController.getAttendeeList, // this gets the people who haven't responded to the invite
   UserController.getEventDateTime, // this gets details of the event: host, date, location, time
   (req, res) => {
     const data = {
       invited: res.locals.attendeeList,
       rsvpd: res.locals.inviteList,
-      dateTime: res.locals.eventDateTime
-    }
+      dateTime: res.locals.eventDateTime,
+      eventId: req.params.eventId,
+    };
     res.status(200).json(data);
-  }
+  },
 );
 
 /* -------------------Host--------------------- */
@@ -98,7 +96,7 @@ app.post(
   (req, res) => {
     // res.status(200).json(res.locals.userEventsId);
     res.status(200).redirect('/');
-  }
+  },
 );
 
 /* --------------- Attendee --------------- */
@@ -110,7 +108,7 @@ app.get(
   AttendeeController.getAllInvitedEvents,
   (req, res) => {
     res.status(200).json(res.locals.allInvitedEvents);
-  }
+  },
 );
 
 // Get all RSVP'd events for a specific attendee NOT only invited
@@ -119,7 +117,7 @@ app.get(
   AttendeeController.getRSVPEvents,
   (req, res) => {
     res.status(200).json(res.locals.attendeeRSVPEvents);
-  }
+  },
 );
 
 // Setting RSVP to true, telling us they are going
@@ -128,7 +126,7 @@ app.post(
   AttendeeController.rsvpEvent,
   (req, res) => {
     res.status(200).json(res.locals.updatedRsvpEvent);
-  }
+  },
 );
 
 /* Claiming what food to bring. you would need to click the event first, so you would have event id
@@ -139,9 +137,9 @@ app.post(
   AttendeeController.claimFood,
   (req, res) => {
     res.status(200).json(res.locals.updatedEventFoodId);
-  }
+  },
 );
 
-app.use(express.static(path.resolve(__dirname,'../../build'))); 
+app.use(express.static(path.resolve(__dirname, '../../build')));
 
 app.listen(8080, () => console.log('Listening on port 8080!'));

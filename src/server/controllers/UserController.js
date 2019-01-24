@@ -12,7 +12,7 @@ const userController = {
   },
 
   getFoodList(req, res, next) {
-    db.query('SELECT * from event_food WHERE event_id = ?;', [req.params.eventId], (err, results) =>{
+    db.query('SELECT * from event_food WHERE event_id = ?;', [req.params.eventId], (err, results) => {
       if (err) throw err;
       res.locals.foodList = results;
       next();
@@ -27,10 +27,11 @@ const userController = {
       AND u.user_id = eu.attendee_id
       AND ef.event_id = ?;`,
       [req.params.eventId], (err, results) => {
-      if (err) throw err;
-      res.locals.inviteList = results;
-      next();
-    });
+        if (err) throw err;
+        res.locals.inviteList = results;
+        next();
+      },
+    );
   },
 
   getAttendeeList(req, res, next) {
@@ -41,10 +42,11 @@ const userController = {
       AND eu.rsvp = 0
       AND eu.event_id = ?;`,
       [req.params.eventId], (err, results) => {
-      if (err) throw err;
-      res.locals.attendeeList = results;
-      next();
-    });
+        if (err) throw err;
+        res.locals.attendeeList = results;
+        next();
+      },
+    );
   },
 
   getEventDateTime(req, res, next) {
@@ -56,7 +58,8 @@ const userController = {
         if (err) throw err;
         res.locals.eventDateTime = results;
         next();
-    });
+      },
+    );
   },
 };
 

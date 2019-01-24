@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import {
+  BrowserRouter as Router, Route, Link, Prompt,
+} from 'react-router-dom';
 import HostViewContainer from '../containers/HostViewContainer';
 import AttendeeViewContainer from '../containers/AttendeeViewContainer';
-import { BrowserRouter as Router, Route, Link, Prompt } from 'react-router-dom';
 
 class Header extends Component {
     renderContent() {
@@ -34,22 +36,21 @@ class Header extends Component {
             </div>
           </div>
         </Router>
-                )
-
-        }
+        )
     }
-    render() { 
-        return (
-            <nav>
-                <div className= "nav-wrapper">
-                </div>
-                <ul>
-                    {this.renderContent()}
-                    
+  }
+
+  render() {
+    return (
+          <nav>
+              <div className="nav-wrapper" />
+              <ul>
+                  {this.renderContent()}
+
                 </ul>
             </nav>
-        );
-    }
+    );
+  }
 }
- 
+
 export default Header;
