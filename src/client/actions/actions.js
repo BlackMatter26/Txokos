@@ -54,8 +54,8 @@ export const addFood = (dispatch, data) => {
     });
 };
 
-export const loadEventsHosting = () => dispatch => {
-  URL = '/api/events';
+export const loadEventsHosting = (user_id) => dispatch => {
+  URL = `/api/event/${user_id}`;
   fetch(URL)
     .then(function(response) {
       return response.json();
@@ -71,8 +71,8 @@ export const loadEventsHosting = () => dispatch => {
     });
 };
 
-export const loadEventsInvited = () => dispatch => {
-  URL = '/api/attendee_invited_event/4';
+export const loadEventsInvited = (user_id) => dispatch => {
+  URL = `/api/attendee_invited_event/${user_id}`;
   fetch(URL)
     .then(function(response) {
       return response.json();

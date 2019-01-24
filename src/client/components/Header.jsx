@@ -10,9 +10,7 @@ class Header extends Component {
                 return;
             case false: //not logged in
                 return (
-                    <li>
-                        <a href="/auth/google">Sign in With Google</a>
-                    </li>
+                        <a href="/auth/google"><img src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png"/></a>
                 )
             default:
                 return(
@@ -30,10 +28,9 @@ class Header extends Component {
               </a>
             </nav>
             <div>
-              <Route path="/host" component={HostViewContainer} />
-              <Route path="/host/details" component={HostViewContainer} />
+              <Route path="/host" render={()=>(<HostViewContainer user={this.props.user}/>)} />
 
-              <Route path="/attendee" exact component={AttendeeViewContainer} />
+              <Route path="/attendee" exact render={()=> (<AttendeeViewContainer user={this.props.user}/>)} />
             </div>
           </div>
         </Router>

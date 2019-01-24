@@ -6,11 +6,13 @@ import MyEvents from '../components/MyEvents';
 import EventDetails from '../components/EventDetails';
 import SidePanel from '../components/SidePanel';
 
-const mapStateToProps = ({ events }) => ({
+const mapStateToProps = ({ events, auth }) => ({
   eventsImHosting: events.eventsImHosting,
   listOfAttendees: events.listOfAttendees,
   seeEventDetails: events.seeEventDetails,
-  listOfInvited: events.listOfInvited
+  listOfInvited: events.listOfInvited,
+  user: auth.user
+
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
@@ -20,7 +22,7 @@ class HostViewContainer extends Component {
     super(props);
   }
   componentDidMount() {
-    this.props.loadEventsHosting();
+    this.props.loadEventsHosting(this.props.user[0].user_id);
   }
   render() {
     return (

@@ -4,13 +4,13 @@ const keys = require('../config/keys');
 const db = require('../models/database.js');
 
 passport.serializeUser((user,done) => {
-  console.log("passport.js the user in serialize is ", user);
+  console.log("IN SERIALIZE USER");
   if(user.length < 1) done(null, 0);
   else done(null, user[0].user_id);
 });
 
 passport.deserializeUser((user_id , done) => {
-  console.log("desrialize user id", user_id)
+  console.log("IN DESERIALIZE USER")
   if(user_id.length < 1){
     done(null,null);
   }
@@ -40,18 +40,16 @@ passport.use(new GoogleStrategy({
                 'INSERT INTO user SET ?',
                 {
                   email: profile.emails[0].value,
-                  pass_hash: 'a',
+                  pass_hash: '',
                   name: profile.displayName,
                   avatar: profile.photos[0].value,
                   googleID: profile.id
                 },
                 (err, results) => {
                   if (err) throw err;
-                  console.log("passport",results.insertId)
                   db.query('SELECT * FROM user WHERE user_id=?',
                     results.insertId,
                   (err, res) =>{
-                    console.log("FIND THE USER RESULTS ", res)
                     done(null,res);
 
                   })
