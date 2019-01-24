@@ -16,7 +16,7 @@ class App extends Component {
     console.log('APP.jsx props', this.props);
     return (
       <div>
-        <a href="/" id="txokos">TXOKOS</a>
+        <a href="/" id="txokos">MUKBANG</a>
         <Header user={this.props.user} />
         <div className="landingPage" />
         <img src="https://images.earthtouchnews.com/media/1516126/pink_fairy_armadillo_nigiri_2015-11-19.jpg" />

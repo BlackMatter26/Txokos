@@ -3,16 +3,18 @@ import Event from './Event';
 import { BrowserRouter as Router, Route, Link, Prompt } from 'react-router-dom';
 import EventDetails from './EventDetails';
 
-const MyEvents = props => {
+const MyEventsAttendee = props => {
   const events = [];
-  props.eventsImHosting.forEach((event, i) => {
+  props.eventsImInvitedTo.forEach((event, i) => {
     const id = event.event_id;
     events.push(
       <Router key={`router${id}`}>
         <div>
           <Event id={i} key={`event${id}`} event={event} />
           <div>
-            <Link id={id} className="detailsButton" key={`link${id}`} to="/details" onClick={props.listOfAttendees}>
+            <Link id={id} className="detailsButton" key={`link${id}`} to="/details" onClick={(event) =>{
+              props.listAttendees(event); props.listFood(event);
+            }}>
               Details 
             </Link>
 
@@ -29,7 +31,7 @@ const MyEvents = props => {
     );
   });
 
-  return <div className="myEvents">{events}</div>;
+  return <div className="myEventsAttendee">{events}</div>;
 };
 
-export default MyEvents;
+export default MyEventsAttendee;

@@ -10,7 +10,24 @@ const SidePanelAttendee = props => {
     if (props.seeEventDetails) {
       panel.push(<this.props.listOfAttendees.dateTime />);
     }
-    
+    console.log("SIDE PANEL",props.listOfAttendees);
+    let {invited} = props.listOfAttendees;
+    let {foodsToBring} = props.foodsToBring;
+    console.log("THE FOODS TO BRING ", foodsToBring)
+    for(let i =0; i<invited.length; i++){
+      panel.push(
+            <div className = "attendee" key={i}>
+              <div className="attendeeName">{invited[i].name}</div>
+            </div>
+      );
+    }
+    // for(let i = 0; i < foodsToBring.length; i++){
+    //   panel.push(
+    //     <div className="food" key={i}>
+    //       <div className="foodName">{foodsToBring[i]}</div>
+    //     </div>
+    //   )
+    // }
     // console.log("EVERYONE RSVP'D: ", typeof props.listOfAttendees.rsvpd);
     // for(let i = 0; i < rsvpd.length; i++){
     //   panel.push(

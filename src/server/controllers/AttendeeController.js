@@ -12,6 +12,7 @@ const attendeeController = {
         results.forEach(event => {
           events.push(event.event_id);
         });
+        console.log("get invited events", results)
         res.locals.attendeeInvitedEventsId = events;
         //   db.end();
         next();
@@ -26,7 +27,10 @@ const attendeeController = {
       })`,
 
       (err, results) => {
-        if (err) throw err;
+        if (err){
+          console.log("in err")
+          res.locals.allInvitedEvents = [];
+        } 
         res.locals.allInvitedEvents = results;
         // db.end();
         next();

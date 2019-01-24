@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actions';
 import MyEvents from '../components/MyEvents';
-import EventDetails from '../components/EventDetails';
 import SidePanel from '../components/SidePanel';
 import EventForm from '../components/EventForm';
 
 
-const mapStateToProps = ({ events }) => ({
+const mapStateToProps = ({ events, auth }) => ({
   eventsImHosting: events.eventsImHosting,
   listOfAttendees: events.listOfAttendees,
   seeEventDetails: events.seeEventDetails,
   listOfInvited: events.listOfInvited,
+  user: auth.user,
   foodsToBring: events.foodsToBring,
 });
 
@@ -35,7 +35,7 @@ class HostViewContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.loadEventsHosting();
+    this.props.loadEventsHosting(this.props.user[0].user_id);
   }
 
   handleNewEventClick() {
@@ -43,7 +43,7 @@ class HostViewContainer extends Component {
   }
 
   handleEventCreatedClick() {
-    this.props.createEvent(this.state);
+    this.props.createEvent(this.state, this.props.user[0].user_id);
     this.setState({ createNewEvent: false });
   }
 

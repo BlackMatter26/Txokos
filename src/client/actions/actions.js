@@ -1,8 +1,9 @@
 import * as types from '../constants/actionTypes';
 
-export const createEvent = data => (dispatch) => {
+export const createEvent = (data ,uid) => (dispatch) => {
   // TODO: FORMAT DATA AS NEEDED FOR POST
-  const URL = '/api/new_event/1';
+  console.log("MY USER ID" ,uid);
+  const URL = `/api/new_event/${uid}`;
   fetch(URL, {
     method: 'POST',
     headers: {
@@ -33,7 +34,7 @@ export const addFood = (dispatch, data) => {
     body: JSON.stringify(data),
   })
     .then((response) => {
-      console.log(response.json());
+      console.log("ADD FOOD actiong",response.json());
       response.json();
     })
     .then((json) => {
@@ -49,12 +50,12 @@ export const addFood = (dispatch, data) => {
     });
 };
 
-export const loadEventsHosting = () => (dispatch) => {
-  URL = '/api/events';
+export const loadEventsHosting = (user_id) => dispatch => {
+  URL = `/api/event/${user_id}`;
   fetch(URL)
     .then(response => response.json())
     .then((myJson) => {
-      // console.log(myJson);
+      console.log("LOAD EVENTS HOSTING",myJson);
       let events = JSON.stringify(myJson);
       events = JSON.parse(events);
       dispatch({
@@ -64,11 +65,16 @@ export const loadEventsHosting = () => (dispatch) => {
     });
 };
 
-export const loadEventsInvited = () => (dispatch) => {
-  URL = '/api/attendee_invited_event/4';
+export const loadEventsInvited = (user_id) => dispatch => {
+  URL = `/api/attendee_invited_event/${user_id}`;
+
   fetch(URL)
-    .then(response => response.json())
+    .then(response => {
+      return response.json()
+    })
     .then((myJson) => {
+      console.log("LOAD EVENTS INVITED ", myJson)
+
       dispatch({
         type: types.LOAD_EVENTS_INVITED,
         payload: myJson,
@@ -77,6 +83,7 @@ export const loadEventsInvited = () => (dispatch) => {
 };
 
 export const listAttendees = event => (dispatch) => {
+  console.log("LIST THE ATTENDEES Y'AA::::");
   URL = `/api/invite_list/${event.target.id}`;
   fetch(URL)
     .then(response => response.json())
@@ -93,6 +100,7 @@ export const listFood = event => (dispatch) => {
   fetch(URL)
     .then(response => response.json())
     .then((myJson) => {
+      console.log("LIST FOOD ", myJson)
       dispatch({
         type: types.LIST_FOOD,
         payload: myJson,
