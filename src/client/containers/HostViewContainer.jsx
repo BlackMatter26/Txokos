@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actions';
 import MyEvents from '../components/MyEvents';
-import EventDetails from '../components/EventDetails';
 import SidePanel from '../components/SidePanel';
 import EventForm from '../components/EventForm';
 
@@ -44,7 +43,7 @@ class HostViewContainer extends Component {
   }
 
   handleEventCreatedClick() {
-    this.props.createEvent(this.state);
+    this.props.createEvent(this.state, this.props.user[0].user_id);
     this.setState({ createNewEvent: false });
   }
 

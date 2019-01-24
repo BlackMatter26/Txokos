@@ -4,7 +4,7 @@ const keys = require('../config/keys');
 const db = require('../models/database.js');
 
 passport.serializeUser((user,done) => {
-  console.log("IN SERIALIZE USER");
+  console.log("IN SERIALIZE USER", user);
   if(user.length < 1) done(null, 0);
   else done(null, user[0].user_id);
 });
