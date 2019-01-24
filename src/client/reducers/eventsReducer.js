@@ -5,10 +5,11 @@ const initialState = {
   eventsImInvitedTo: [],
   foodsToBring: [],
   listOfAttendees: {
+    eventId: null,
     invited: [],
-    rsvpd: []
+    rsvpd: [],
   },
-  seeEventDetails: false
+  seeEventDetails: false,
 };
 
 const eventsReducer = (state = initialState, action) => {
@@ -16,25 +17,25 @@ const eventsReducer = (state = initialState, action) => {
     case types.LOAD_EVENTS_HOSTING:
       return {
         ...state,
-        eventsImHosting: action.payload
+        eventsImHosting: action.payload,
       };
 
     case types.LOAD_EVENTS_INVITED:
       return {
         ...state,
-        eventsImInvitedTo: action.payload
+        eventsImInvitedTo: action.payload,
       };
 
     case types.CREATE_EVENT:
-      const { host, location, time, date, foodList, invitees } = action.payload;
+      const {
+        host, location, eventTime, eventName,
+      } = action.payload;
 
       const newEvent = {
         host,
         location,
-        time,
-        date,
-        foodList,
-        invitees
+        time: eventTime,
+        event_name: eventName,
       };
 
       const eventsImHosting = state.eventsImHosting.slice();
@@ -43,21 +44,25 @@ const eventsReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        eventsImHosting
+        eventsImHosting,
       };
     case types.ADD_FOOD_TO_EVENT:
-    return {
-      ...state,
-      foodsToBring: action.payload
-    }
-
-    case types.INVITE_PEOPLE:
+      return {
+        ...state,
+        foodsToBring: action.payload,
+      };
 
     case types.VIEW_ATTENDEES:
       return {
         ...state,
         seeEventDetails: true,
-        listOfAttendees: action.payload
+        listOfAttendees: action.payload,
+      };
+
+    case types.LIST_FOOD:
+      return {
+        ...state,
+        foodsToBring: action.payload,
       };
 
     default:
